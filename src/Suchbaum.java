@@ -6,16 +6,17 @@ public class Suchbaum {
         System.out.println("Beim einfügen: Wenn der Wert schon vorhanden ist, wird er nicht nochmal eingefügt");
         System.out.println("Wenn sie keinen Knoten angeben, wird der Wert 0 eingefügt");
         //Werte in den Baum einfügen
-        suchbaum.einfuegen(baum, "1", "null");
-        suchbaum.einfuegen(baum, "4", "1");
-        suchbaum.einfuegen(baum, "3", "4");
-        suchbaum.einfuegen(baum, "6", "4");
-        suchbaum.einfuegen(baum, "5", "6");
+        suchbaum.einfuegen(baum, "6", "null");
+        suchbaum.einfuegen(baum, "3", "6");
+        suchbaum.einfuegen(baum, "9", "6");
+        suchbaum.einfuegen(baum, "1", "3");
+        suchbaum.einfuegen(baum, "5", "3");
+        suchbaum.einfuegen(baum, "7", "9");
         //Baum ausgeben
         suchbaum.ausgeben(baum);
         System.out.println("");
         //Baum löschen
-        suchbaum.loeschen(baum, "6");
+        suchbaum.loeschen(baum, "7");
         //Baum ausgeben
         suchbaum.ausgeben(baum);
         System.out.println("");
@@ -29,7 +30,9 @@ public class Suchbaum {
 
     }
 
-    //Suchbaum für Stings mit Opeartionen: Einfügen, Löschen, Modifizieren, Baumausgabe
+    /**
+     * Suchbaum für Stings mit Opeartionen: Einfügen, Löschen, Modifizieren, Baumausgabe
+     * **/
 
     //Knoten
     class Knoten {
@@ -96,37 +99,47 @@ public class Suchbaum {
     }
 
     public void loeschen1(Knoten k, String s) {
+        System.out.println(k);
+        System.out.println(k.wert);
+        System.out.println(k.links);
+        System.out.println(k.rechts);
+        System.out.println("");
         //Wenn der Wert des aktuellen Knotens gleich dem zu löschenden Wert ist, wird der Knoten gelöscht
         if (k.wert.equals(s)) {
             //Wenn der Knoten keine Kinder hat, wird er gelöscht
             if (k.links == null && k.rechts == null) {
                 k = null;
+                System.out.println(k);
             }
             //Wenn der Knoten nur ein Kind hat, wird er gelöscht und das Kind wird an seine Stelle gesetzt
-            if (k.links != null && k.rechts == null) {
+            else if (k.links != null && k.rechts == null) {
                 k = k.links;
-            }
-            if (k.links == null && k.rechts != null) {
+            } else if (k.links == null && k.rechts != null) {
                 k = k.rechts;
             }
-            //Wenn der Knoten zwei Kinder hat, wird der kleinste Knoten im rechten Teilbaum gesucht und an seine Stelle gesetzt
-            if (k.links != null && k.rechts != null) {
-                Knoten k1 = k.rechts;
-                while (k1.links != null) {
-                    k1 = k1.links;
+            //Wenn der Knoten zwei Kinder hat, und der rechte Sohn ein Blatt ist, wird der Knoten gelöscht und der rechte Sohn wird an seine Stelle gesetzt
+            //ansonsten wird der Knoten mit dem am weitesten links stehenden Blatts des rechten Teilbaums verstauscht und entfernt
+            else if (k.links != null && k.rechts != null) {
+                if (k.rechts.links == null && k.rechts.rechts == null) {
+                    k = k.rechts;
+                } else {
+                    Knoten k1 = k.rechts;
+                    while (k1.links.links != null) {
+                        k1 = k1.links;
+                    }
+                    k.wert = k1.links.wert;
+                    k1.links = null;
                 }
-                k.wert = k1.wert;
-                loeschen1(k.rechts, k1.wert);
             }
         }
         //Wenn der Wert des aktuellen Knotens kleiner ist als der zu löschende Wert, wird der linke Teilbaum durchsucht
-        if (s.compareTo(k.wert) < 0) {
+        else if (s.compareTo(k.wert) < 0) {
             if (k.links != null) {
                 loeschen1(k.links, s);
             }
         }
         //Wenn der Wert des aktuellen Knotens größer ist als der zu löschende Wert, wird der rechte Teilbaum durchsucht
-        if (s.compareTo(k.wert) > 0) {
+        else if (s.compareTo(k.wert) > 0) {
             if (k.rechts != null) {
                 loeschen1(k.rechts, s);
             }
@@ -162,25 +175,24 @@ public class Suchbaum {
 
     //Baumausgabe
     public void ausgeben(Baum b) {
-        //Baumartige Ausgabe
+        //Baumartige Ausgabe mit einrücken
         if (b.wurzel != null) {
             ausgeben1(b.wurzel, 0);
         }
     }
 
-    public void ausgeben1(Knoten k, int tiefe) {
-        //Wenn der Knoten einen linken Nachfolger hat, dann rekursiver Aufruf mit dem linken Nachfolger
-        if (k.links != null) {
-            ausgeben1(k.links, tiefe + 1);
+    public void ausgeben1(Knoten k, int i) {
+        //ausgabe mit einrückung von oben nach unten
+        if (k.rechts != null) {
+            ausgeben1(k.rechts, i + 1);
         }
-        //Ausgabe des Knotens
-        for (int i = 0; i < tiefe; i++) {
+        for (int j = 0; j < i; j++) {
             System.out.print("   ");
         }
         System.out.println(k.wert);
-        //Wenn der Knoten einen rechten Nachfolger hat, dann rekursiver Aufruf mit dem rechten Nachfolger
-        if (k.rechts != null) {
-            ausgeben1(k.rechts, tiefe + 1);
+        if (k.links != null) {
+            ausgeben1(k.links, i + 1);
         }
     }
+
 }
