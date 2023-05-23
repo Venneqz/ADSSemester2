@@ -57,17 +57,17 @@ public class SearchTree {
 
     // Reckursive insert funktion
     private static void insertRec(BinaryTree node, String key) {
-        if (key.compareTo(node.value) < 0) {
+        if (key.compareTo(node.value) < 0) { //Wenn der key kleiner ist als der Wert des Knotens
             if (node.left == null) {
-                node.left = new BinaryTree(key);
+                node.left = new BinaryTree(key); //Wenn der linke Sohn leer ist, wird der key als linker Sohn eingefügt
             } else {
-                insertRec(node.left, key);
+                insertRec(node.left, key); //Wenn der linke Sohn nicht leer ist, wird die Funktion mit dem linken Sohn als Knoten aufgerufen
             }
-        } else if (key.compareTo(node.value) > 0) {
+        } else if (key.compareTo(node.value) > 0) { //Wenn der key größer ist als der Wert des Knotens
             if (node.right == null) {
-                node.right = new BinaryTree(key);
+                node.right = new BinaryTree(key); //Wenn der rechte Sohn leer ist, wird der key als rechter Sohn eingefügt
             } else {
-                insertRec(node.right, key);
+                insertRec(node.right, key); //Wenn der rechte Sohn nicht leer ist, wird die Funktion mit dem rechten Sohn als Knoten aufgerufen
             }
         }
     }
@@ -181,13 +181,13 @@ public class SearchTree {
                     new BinaryTree("E")
             );
 
-            // Perform binary tree operations
-            System.out.println("Left subtree: " + BinaryTree.value(BinaryTree.left(tree))); // Output: B
-            System.out.println("Right subtree: " + BinaryTree.value(BinaryTree.right(tree))); // Output: E
-            System.out.println("Root value: " + BinaryTree.value(tree)); // Output: C
-            System.out.println("Is tree empty? " + BinaryTree.is_empty(tree)); // Output: false
-            System.out.println("Is left subtree empty? " + BinaryTree.is_empty(BinaryTree.left(tree))); // Output: false
-            System.out.println("Is right subtree empty? " + BinaryTree.is_empty(BinaryTree.right(tree))); // Output: false
+            //Ausgabe
+            System.out.println("Linker Teilbaum: " + BinaryTree.value(BinaryTree.left(tree))); // Output: B
+            System.out.println("Rechter Teilbaum: " + BinaryTree.value(BinaryTree.right(tree))); // Output: E
+            System.out.println("Wurzel value: " + BinaryTree.value(tree)); // Output: C
+            System.out.println("Leerer Buam? " + BinaryTree.is_empty(tree)); // Output: false
+            System.out.println("Ist linker Teilbaum leer? " + BinaryTree.is_empty(BinaryTree.left(tree))); // Output: false
+            System.out.println("Ist linker Teilbaum leer? " + BinaryTree.is_empty(BinaryTree.right(tree))); // Output: false
 
             System.out.println();
 
