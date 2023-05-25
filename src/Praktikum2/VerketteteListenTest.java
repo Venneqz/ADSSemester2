@@ -1,3 +1,7 @@
+package Praktikum2;
+
+import Praktikum2.VerketteteListen;
+
 public class VerketteteListenTest {
     public static void main(String[] args) {
         String s = "Wow", p = "krass", d = "genial", f = "Toll";

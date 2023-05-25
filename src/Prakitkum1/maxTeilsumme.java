@@ -1,3 +1,5 @@
+package Prakitkum1;
+
 import java.util.Random;
 
 public class maxTeilsumme {

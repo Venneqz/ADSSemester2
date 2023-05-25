@@ -1,3 +1,5 @@
+package Praktikum3;
+
 public class Suchbaum {
     public static void main(String[] args) {
         //Neuen Baum erstellen
@@ -31,7 +33,7 @@ public class Suchbaum {
     }
 
     /**
-     * Suchbaum für Stings mit Opeartionen: Einfügen, Löschen, Modifizieren, Baumausgabe
+     * Praktikum3.Suchbaum für Stings mit Opeartionen: Einfügen, Löschen, Modifizieren, Baumausgabe
      * **/
 
     //Knoten

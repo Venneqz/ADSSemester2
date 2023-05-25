@@ -1,3 +1,5 @@
+package Praktikum3;
+
 public class AVLTree {
     private static AVLNode root;
 

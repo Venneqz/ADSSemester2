@@ -1,3 +1,5 @@
+package Praktikum3;
+
 public class SearchTree {
 
     public static class BinaryTree {
@@ -170,7 +172,7 @@ public class SearchTree {
 
     //main
     public static void main(String[] args) {
-            //Binärer Suchbaum
+            //Binärer Praktikum3.Suchbaum
             BinaryTree tree = BinaryTree.bin(
                     BinaryTree.bin(
                             new BinaryTree("B"),
@@ -191,7 +193,7 @@ public class SearchTree {
 
             System.out.println();
 
-            //Suchbaum Werte einfügen
+            //Praktikum3.Suchbaum Werte einfügen
             SearchTree.insert("6");
             SearchTree.insert("3");
             SearchTree.insert("9");
